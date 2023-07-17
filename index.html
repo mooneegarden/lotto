@@ -1,465 +1,450 @@
+<!DOCTYPE html>
 <html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2299.6">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-  </style>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table td {
+            padding: 5px;
+            border: none;
+        }
+
+        label {
+            display: block;
+            position: relative;
+            text-align: center;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .number {
+            display: inline-block;
+            position: relative;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            border-radius: 50%;
+            background-color: #eee;
+            color: #000;
+        }
+
+        .number:hover {
+            background-color: #ccc;
+        }
+
+        .number::before {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .number[data-color="yellow"] {
+            background-color: #FFEB3B;
+        }
+
+        .number[data-color="blue"] {
+            background-color: #2196F3;
+        }
+
+        .number[data-color="red"] {
+            background-color: #F44336;
+        }
+
+        .number[data-color="grey"] {
+            background-color: #9E9E9E;
+        }
+
+        .number[data-color="green"] {
+            background-color: #4CAF50;
+        }
+
+        .checkbox {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .checkbox:checked + .number {
+            border: 2px solid #000;
+        }
+
+        .lotto-button {
+            width: 80%;
+            margin-bottom: 20px;
+        }
+
+        .lotto-result {
+            font-size: 18px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .lotto-list {
+            font-size: 16px;
+            line-height: 1.5;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>flex-direction: column;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>justify-content: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>height: 100vh;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin: 0;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>table {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>width: 50%;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-collapse: collapse;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>table td {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 5px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border: none;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>label {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: block;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>position: relative;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.number {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: inline-block;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>position: relative;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>width: 30px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>height: 30px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>line-height: 30px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 50%;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: #eee;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: #000;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.number:hover {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: #ccc;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.number::before {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>content: '';</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: block;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>top: 50%;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>left: 50%;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transform: translate(-50%, -50%);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.number[data-color="yellow"] {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: #FFEB3B;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.number[data-color="blue"] {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: #2196F3;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.number[data-color="red"] {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: #F44336;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.number[data-color="grey"] {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: #9E9E9E;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.number[data-color="green"] {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: #4CAF50;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.checkbox {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>top: 0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>left: 0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>opacity: 0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.checkbox:checked + .number {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border: 2px solid #000;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.lotto-button {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>width: 80%;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.lotto-result {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 18px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.lotto-list {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 16px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>line-height: 1.5;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;table&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;tr&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="1"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="yellow"&gt;1&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="2"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="yellow"&gt;2&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="3"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="yellow"&gt;3&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="4"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="yellow"&gt;4&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="5"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="yellow"&gt;5&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/tr&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;tr&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="6"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="yellow"&gt;6&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="7"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="yellow"&gt;7&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="yellow"&gt;8&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="9"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="yellow"&gt;9&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="10"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="yellow"&gt;10&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/tr&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- 나머지 숫자들을 추가해주세요 --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- 11부터 45까지의 숫자를 추가합니다 --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;tr&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="11"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="blue"&gt;11&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="12"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="blue"&gt;12&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="13"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="blue"&gt;13&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="14"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="blue"&gt;14&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="15"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="blue"&gt;15&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/tr&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;tr&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="16"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="blue"&gt;16&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="17"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="blue"&gt;17&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="18"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="blue"&gt;18&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="19"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="blue"&gt;19&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="20"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="blue"&gt;20&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/tr&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;tr&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="21"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="red"&gt;21&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="22"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="red"&gt;22&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="23"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="red"&gt;23&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="24"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="red"&gt;24&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="25"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="red"&gt;25&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/tr&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;tr&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="26"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="red"&gt;26&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="27"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="red"&gt;27&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="28"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="red"&gt;28&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="29"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="red"&gt;29&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="30"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="red"&gt;30&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/tr&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;tr&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="31"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="grey"&gt;31&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="32"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="grey"&gt;32&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="33"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="grey"&gt;33&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="34"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="grey"&gt;34&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="35"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="grey"&gt;35&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/tr&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;tr&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="36"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="grey"&gt;36&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="37"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="grey"&gt;37&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="38"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="grey"&gt;38&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="39"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="grey"&gt;39&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="40"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="grey"&gt;40&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/tr&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;tr&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="41"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="green"&gt;41&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="42"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="green"&gt;42&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="43"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="green"&gt;43&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="44"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="green"&gt;44&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="checkbox" class="checkbox" value="45"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="number" data-color="green"&gt;45&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/tr&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/table&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="lotto-button" onclick="generateLottoNumbers()"&gt;로또 번호 생성&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="lotto-result" id="lottoResult"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="lotto-list" id="lottoList"&gt;&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>var lottoNumbers = [];</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>function generateLottoNumbers() {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>var selectedNumbers = [];</p>
-<p class="p1"><span class="Apple-converted-space">            </span>var checkboxes = document.getElementsByClassName('checkbox');</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>for (var i = 0; i &lt; checkboxes.length; i++) {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>if (checkboxes[i].checked) {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>selectedNumbers.push(parseInt(checkboxes[i].value));</p>
-<p class="p1"><span class="Apple-converted-space">                </span>}</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>var requiredSelections = 6 - selectedNumbers.length;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>var availableNumbers = [];</p>
-<p class="p1"><span class="Apple-converted-space">            </span>for (var j = 1; j &lt;= 45; j++) {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>if (!selectedNumbers.includes(j)) {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>availableNumbers.push(j);</p>
-<p class="p1"><span class="Apple-converted-space">                </span>}</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>var generatedNumbers = [];</p>
-<p class="p1"><span class="Apple-converted-space">            </span>for (var k = 0; k &lt; requiredSelections; k++) {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>var randomIndex = Math.floor(Math.random() * availableNumbers.length);</p>
-<p class="p1"><span class="Apple-converted-space">                </span>var randomNumber = availableNumbers[randomIndex];</p>
-<p class="p1"><span class="Apple-converted-space">                </span>generatedNumbers.push(randomNumber);</p>
-<p class="p1"><span class="Apple-converted-space">                </span>availableNumbers.splice(randomIndex, 1);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>var finalNumbers = selectedNumbers.concat(generatedNumbers);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>finalNumbers.sort(function(a, b) {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>return a - b;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>var lottoResult = document.getElementById('lottoResult');</p>
-<p class="p1"><span class="Apple-converted-space">            </span>var lottoList = document.getElementById('lottoList');</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>lottoResult.innerText = finalNumbers.join(', ');</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>var newLottoNumber = "[" + (lottoNumbers.length + 1) + "] " + finalNumbers.join(', ');</p>
-<p class="p1"><span class="Apple-converted-space">            </span>lottoNumbers.push(newLottoNumber);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>lottoList.innerHTML = lottoNumbers.join('&lt;br&gt;');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+    <table>
+        <tr>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="1">
+                    <span class="number" data-color="yellow">1</span>
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="2">
+                    <span class="number" data-color="yellow">2</span>
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="3">
+                    <span class="number" data-color="yellow">3</span>
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="4">
+                    <span class="number" data-color="yellow">4</span>
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="5">
+                    <span class="number" data-color="yellow">5</span>
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="6">
+                    <span class="number" data-color="yellow">6</span>
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="7">
+                    <span class="number" data-color="yellow">7</span>
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="8">
+                    <span class="number" data-color="yellow">8</span>
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="9">
+                    <span class="number" data-color="yellow">9</span>
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="10">
+                    <span class="number" data-color="yellow">10</span>
+                </label>
+            </td>
+        </tr>
+        <!-- 나머지 숫자들을 추가해주세요 -->
+        <!-- 11부터 45까지의 숫자를 추가합니다 -->
+        <tr>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="11">
+                    <span class="number" data-color="blue">11</span>
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="12">
+                    <span class="number" data-color="blue">12</span>
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="13">
+                    <span class="number" data-color="blue">13</span>
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="14">
+                    <span class="number" data-color="blue">14</span>
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="15">
+                    <span class="number" data-color="blue">15</span>
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="16">
+                    <span class="number" data-color="blue">16</span>
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="17">
+                    <span class="number" data-color="blue">17</span>
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="18">
+                    <span class="number" data-color="blue">18</span>
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="19">
+                    <span class="number" data-color="blue">19</span>
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="20">
+                    <span class="number" data-color="blue">20</span>
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="21">
+                    <span class="number" data-color="red">21</span>
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="22">
+                    <span class="number" data-color="red">22</span>
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="23">
+                    <span class="number" data-color="red">23</span>
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="24">
+                    <span class="number" data-color="red">24</span>
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="25">
+                    <span class="number" data-color="red">25</span>
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="26">
+                    <span class="number" data-color="red">26</span>
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="27">
+                    <span class="number" data-color="red">27</span>
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="28">
+                    <span class="number" data-color="red">28</span>
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="29">
+                    <span class="number" data-color="red">29</span>
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="30">
+                    <span class="number" data-color="red">30</span>
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="31">
+                    <span class="number" data-color="grey">31</span>
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="32">
+                    <span class="number" data-color="grey">32</span>
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="33">
+                    <span class="number" data-color="grey">33</span>
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="34">
+                    <span class="number" data-color="grey">34</span>
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="35">
+                    <span class="number" data-color="grey">35</span>
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="36">
+                    <span class="number" data-color="grey">36</span>
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="37">
+                    <span class="number" data-color="grey">37</span>
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="38">
+                    <span class="number" data-color="grey">38</span>
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="39">
+                    <span class="number" data-color="grey">39</span>
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="40">
+                    <span class="number" data-color="grey">40</span>
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="41">
+                    <span class="number" data-color="green">41</span>
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="42">
+                    <span class="number" data-color="green">42</span>
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="43">
+                    <span class="number" data-color="green">43</span>
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="44">
+                    <span class="number" data-color="green">44</span>
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox" value="45">
+                    <span class="number" data-color="green">45</span>
+                </label>
+            </td>
+        </tr>
+    </table>
+
+    <button class="lotto-button" onclick="generateLottoNumbers()">로또 번호 생성</button>
+    <div class="lotto-result" id="lottoResult"></div>
+    <div class="lotto-list" id="lottoList"></div>
+
+    <script>
+        var lottoNumbers = [];
+
+        function generateLottoNumbers() {
+            var selectedNumbers = [];
+            var checkboxes = document.getElementsByClassName('checkbox');
+
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].checked) {
+                    selectedNumbers.push(parseInt(checkboxes[i].value));
+                }
+            }
+
+            var requiredSelections = 6 - selectedNumbers.length;
+            var availableNumbers = [];
+            for (var j = 1; j <= 45; j++) {
+                if (!selectedNumbers.includes(j)) {
+                    availableNumbers.push(j);
+                }
+            }
+
+            var generatedNumbers = [];
+            for (var k = 0; k < requiredSelections; k++) {
+                var randomIndex = Math.floor(Math.random() * availableNumbers.length);
+                var randomNumber = availableNumbers[randomIndex];
+                generatedNumbers.push(randomNumber);
+                availableNumbers.splice(randomIndex, 1);
+            }
+
+            var finalNumbers = selectedNumbers.concat(generatedNumbers);
+            finalNumbers.sort(function(a, b) {
+                return a - b;
+            });
+
+            var lottoResult = document.getElementById('lottoResult');
+            var lottoList = document.getElementById('lottoList');
+
+            lottoResult.innerText = finalNumbers.join(', ');
+
+            var newLottoNumber = "[" + (lottoNumbers.length + 1) + "] " + finalNumbers.join(', ');
+            lottoNumbers.push(newLottoNumber);
+            lottoList.innerHTML = lottoNumbers.join('<br>');
+        }
+    </script>
 </body>
 </html>
